@@ -1,0 +1,47 @@
+//       program Translate 
+//
+//       Main to Translate Data to Libsvm.
+
+#include <iostream> //for cout endl cin
+#include <fstream> //for iofstream
+#include <cstdlib> //for system
+using namespace std;
+
+int main()
+{
+	fstream in; in.open("E:\\data\\text.txt");
+	if (!in)//Identify the file is Open
+	{
+		cout << "Failed to Open file! 1" << endl;
+		system("pause");
+		return 1;
+	}
+	int count = 0;
+	int Lable = 0; //Decalare Lable
+	cout << "Please intput Label:";
+	cin >> Lable;
+	double x[500]; double y[500]; double z[500];// Decalare three Coor
+	while(!in.eof())// Read Data
+	{
+		in >> x[count] >> y[count] >> z[count];
+		count++;
+	}
+
+	fstream out("E:\\data\\text.dat");//For output Date
+	if (!out)//Identify
+	{
+		cout << "Failed to open file!" << endl;
+		system("pause");
+		return 1;
+	}
+	out << Lable<<" ";
+	for (int m = 0; m < count-2; m++)//output
+	{
+		out << x[m] << ":" << y[m] << ":" << z[m] << " ";
+	}
+	out << endl;
+	out << "Target:" << x[count - 2] <<":"<< x[count-1] << endl;
+
+	system("pause");
+	return 0;
+}
